@@ -1,0 +1,87 @@
+.servicesSection {
+  padding: 4rem 0;
+}
+
+.servicesHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.servicesHeader h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.servicesSubtitle {
+  font-size: 1.125rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.servicesGrid {
+  margin-bottom: 3rem;
+}
+
+.serviceCard {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.serviceCard h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.serviceCard p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.readMoreButton {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.readMoreButton:hover,
+.readMoreButton:focus-visible {
+  border-bottom-color: #0066cc;
+}
+
+.servicesFooter {
+  text-align: center;
+}
+
+.viewAllButton {
+  display: inline-block;
+  background-color: transparent;
+  color: #0066cc;
+  border: 2px solid #0066cc;
+  padding: 0.875rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.viewAllButton:hover,
+.viewAllButton:focus-visible {
+  background-color: #0066cc;
+  color: white;
+  text-decoration: none;
+}

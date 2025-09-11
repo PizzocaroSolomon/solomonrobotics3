@@ -1,0 +1,131 @@
+.contactSection {
+  padding: 4rem 0;
+}
+
+.contactHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contactHeader h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.contactSubtitle {
+  font-size: 1.125rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contactContent {
+  display: grid;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contactForm {
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.formInputError {
+  border-color: #dc2626;
+}
+
+.formInputError:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.errorMessage {
+  display: block;
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.submitButton {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover,
+.submitButton:focus-visible {
+  background-color: #0052a3;
+}
+
+.contactInfo {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.contactInfo h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.contactDetails p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.contactDetails strong {
+  color: #333;
+}
+
+.contactDetails a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.contactDetails a:hover,
+.contactDetails a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .contactContent {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,90 @@
+.header {
+  background-color: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.logo h1 {
+  color: #0066cc;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.nav {
+  position: relative;
+}
+
+.navList {
+  display: none;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  color: #0066cc;
+}
+
+.navLinkActive {
+  color: #0066cc;
+}
+
+.menuToggle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.menuToggle span {
+  width: 24px;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.2s ease;
+}
+
+/* Mobile menu */
+.navListOpen {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+}
+
+@media (min-width: 768px) {
+  .navList {
+    display: flex;
+  }
+  
+  .menuToggle {
+    display: none;
+  }
+}

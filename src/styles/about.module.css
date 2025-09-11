@@ -1,0 +1,87 @@
+.aboutSection {
+  padding: 4rem 0;
+  background-color: #f8f9fa;
+}
+
+.aboutContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.aboutContent h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.aboutText {
+  font-size: 1.125rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.learnMoreButton {
+  display: inline-block;
+  background-color: #0066cc;
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.learnMoreButton:hover,
+.learnMoreButton:focus-visible {
+  background-color: #0052a3;
+  text-decoration: none;
+}
+
+/* About page specific styles */
+.aboutPageSection {
+  padding: 4rem 0;
+}
+
+.aboutPageContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.aboutPageContent h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.aboutPageText {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+.aboutPageText h2 {
+  color: #333;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.valuesList {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.valuesList li {
+  margin-bottom: 0.75rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.valuesList li::before {
+  content: "✓";
+  color: #0066cc;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
