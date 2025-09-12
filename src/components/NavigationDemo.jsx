@@ -712,6 +712,16 @@ const NavigationDemo = () => {
     }
   }, [isPointInObstacle, ROBOT_RADIUS, generateGlobalPath, robot]);
 
+  // Handle touch events for mobile
+  const handleCanvasTouch = useCallback((event) => {
+    const touch = event.touches[0];
+    const rect = canvasRef.current.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+
+    handleCanvasClick({ clientX: x + rect.left, clientY: y + rect.top });
+  }, [])
+
   // Canvas drawing
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -865,6 +875,7 @@ const NavigationDemo = () => {
             width={FIELD_WIDTH}
             height={FIELD_HEIGHT}
             onClick={handleCanvasClick}
+            onTouchStart={handleCanvasTouch}
             className={styles.demoCanvas}
           />
           <div style={{
