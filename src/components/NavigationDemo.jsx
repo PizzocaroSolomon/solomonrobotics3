@@ -6,34 +6,48 @@ const NavigationDemo = () => {
   const animationRef = useRef(null);
   
   // Constants
-  const FIELD_WIDTH = 600;
-  const FIELD_HEIGHT = 400;
+  const FIELD_WIDTH = 800;
+  const FIELD_HEIGHT = 600;
   const ROBOT_SIZE = 20;
-  const ROBOT_RADIUS = ROBOT_SIZE / 2 ;
+  const ROBOT_RADIUS = ROBOT_SIZE / 2;
+  const INFLATION_RADIUS = ROBOT_RADIUS * 3/2;
   const GOAL_THRESHOLD = ROBOT_SIZE / 2;
-  const ROBOT_SPEED = 1.0;
+  const ROBOT_SPEED = 1.5;
+  const LOOK_AHEAD_DISTANCE = ROBOT_SIZE;
+  const WAYPOINT_TOLERANCE = 8;
 
   // More diverse obstacles - wrapped in useMemo to prevent re-creation
   const obstacles = useMemo(() => [
-    // Large obstacles
-    { x: 180, y: 120, width: 80, height: 60 },
-    { x: 350, y: 180, width: 90, height: 70 },
-    { x: 280, y: 320, width: 85, height: 55 },
-    // Medium obstacles
-    { x: 120, y: 280, width: 50, height: 65 },
-    { x: 480, y: 80, width: 60, height: 45 },
-    { x: 450, y: 300, width: 55, height: 70 },
-    { x: 80, y: 150, width: 45, height: 50 },
-    // Small obstacles
-    { x: 320, y: 80, width: 35, height: 35 },
-    { x: 150, y: 50, width: 40, height: 30 },
-    { x: 380, y: 120, width: 30, height: 40 },
-    { x: 520, y: 200, width: 35, height: 45 },
-    { x: 50, y: 320, width: 40, height: 35 },
-    // Narrow obstacles
-    { x: 250, y: 200, width: 20, height: 80 },
-    { x: 420, y: 40, width: 25, height: 60 },
-    { x: 300, y: 250, width: 15, height: 70 }
+    { x: 220, y: 160, width: 80, height: 60 },
+    { x: 480, y: 250, width: 90, height: 70 },
+    { x: 380, y: 460, width: 85, height: 55 },
+    { x: 160, y: 400, width: 50, height: 65 },
+    { x: 640, y: 120, width: 60, height: 45 },
+    { x: 580, y: 460, width: 55, height: 70 },
+    { x: 100, y: 180, width: 45, height: 50 },
+    { x: 420, y: 100, width: 35, height: 35 },
+    { x: 200, y: 80, width: 40, height: 30 },
+    { x: 500, y: 160, width: 30, height: 40 },
+    { x: 680, y: 300, width: 35, height: 45 },
+    { x: 90, y: 480, width: 40, height: 35 },
+    { x: 340, y: 260, width: 20, height: 80 },
+    { x: 560, y: 80, width: 25, height: 60 },
+    { x: 400, y: 360, width: 15, height: 70 },
+    { x: 700, y: 500, width: 50, height: 40 },
+    { x: 60, y: 300, width: 40, height: 40 },
+    { x: 300, y: 540, width: 60, height: 30 },
+    { x: 150, y: 240, width: 30, height: 60 },
+    { x: 520, y: 380, width: 45, height: 35 },
+    { x: 750, y: 100, width: 30, height: 50 },
+    { x: 630, y: 200, width: 40, height: 40 },
+    { x: 460, y: 520, width: 60, height: 30 },
+    { x: 100, y: 100, width: 50, height: 30 },
+    { x: 220, y: 500, width: 45, height: 35 },
+    { x: 720, y: 400, width: 35, height: 45 },
+    { x: 360, y: 180, width: 40, height: 40 },
+    { x: 580, y: 300, width: 55, height: 35 },
+    { x: 300, y: 100, width: 30, height: 40 },
+    { x: 400, y: 40, width: 50, height: 30 }
   ], []);
   
   // Game state
@@ -42,11 +56,12 @@ const NavigationDemo = () => {
   const [isNavigating, setIsNavigating] = useState(false);
   const [globalPath, setGlobalPath] = useState([]);
   const [localPath, setLocalPath] = useState([]);
-  const [currentPathIndex, setCurrentPathIndex] = useState(0);
+  const [currentGlobalIndex, setCurrentGlobalIndex] = useState(0);
+  const [currentLocalIndex, setCurrentLocalIndex] = useState(0);
   const [sensorData, setSensorData] = useState({ lidar: [] });
   const [recoveryMode, setRecoveryMode] = useState(false);
   const [recoveryPath, setRecoveryPath] = useState([]);
-  const [recoverySteps, setRecoverySteps] = useState(0);
+  const [recoveryIndex, setRecoveryIndex] = useState(0);
   const [blockedAttempts, setBlockedAttempts] = useState(0);
 
   // Collision detection with robot radius
@@ -76,10 +91,10 @@ const NavigationDemo = () => {
     
     obstacles.forEach(obs => {
       const expandedObs = {
-        x: obs.x - ROBOT_RADIUS,
-        y: obs.y - ROBOT_RADIUS,
-        width: obs.width + 2 * ROBOT_RADIUS,
-        height: obs.height + 2 * ROBOT_RADIUS
+        x: obs.x - INFLATION_RADIUS,
+        y: obs.y - INFLATION_RADIUS,
+        width: obs.width + 2 * INFLATION_RADIUS,
+        height: obs.height + 2 * INFLATION_RADIUS
       };
       
       for (let y = Math.floor(expandedObs.y/10); y < Math.floor((expandedObs.y + expandedObs.height)/10); y++) {
@@ -105,7 +120,7 @@ const NavigationDemo = () => {
     }
     
     return grid;
-  }, [obstacles, ROBOT_RADIUS, FIELD_WIDTH, FIELD_HEIGHT]);
+  }, [obstacles, INFLATION_RADIUS, ROBOT_RADIUS, FIELD_WIDTH, FIELD_HEIGHT]);
 
   const heuristic = useCallback((a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y), []);
 
@@ -192,9 +207,11 @@ const NavigationDemo = () => {
     return true;
   }, [isPointInObstacle, ROBOT_RADIUS]);
 
+  // Enhanced path smoothing with bezier-like curves
   const smoothPath = useCallback((path) => {
     if (path.length <= 2) return path;
     
+    // First pass: remove unnecessary waypoints using line of sight
     const smoothed = [path[0]];
     let i = 0;
     
@@ -212,14 +229,41 @@ const NavigationDemo = () => {
       i = j;
     }
     
-    return smoothed;
-  }, [isLineOfSightClear]);
+    // Second pass: add intermediate points for smoother curves
+    const finalSmoothed = [smoothed[0]];
+    
+    for (let i = 1; i < smoothed.length; i++) {
+      const prev = smoothed[i - 1];
+      const curr = smoothed[i];
+      const distance = Math.sqrt(
+        Math.pow(curr.x - prev.x, 2) + Math.pow(curr.y - prev.y, 2)
+      );
+      
+      // Add intermediate points for long segments
+      if (distance > 40) {
+        const numPoints = Math.floor(distance / 20);
+        for (let j = 1; j < numPoints; j++) {
+          const t = j / numPoints;
+          const intermX = prev.x + (curr.x - prev.x) * t;
+          const intermY = prev.y + (curr.y - prev.y) * t;
+          
+          if (!isPointInObstacle(intermX, intermY, ROBOT_RADIUS)) {
+            finalSmoothed.push({ x: intermX, y: intermY });
+          }
+        }
+      }
+      
+      finalSmoothed.push(curr);
+    }
+    
+    return finalSmoothed;
+  }, [isLineOfSightClear, isPointInObstacle, ROBOT_RADIUS]);
 
   // A* pathfinding with feasibility check
   const generateGlobalPath = useCallback((start, end) => {
     // Check if end point is reachable
     if (isPointInObstacle(end.x, end.y, ROBOT_RADIUS)) {
-      const searchRadius = ROBOT_RADIUS + 10;
+      const searchRadius = ROBOT_RADIUS;
       for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 8) {
         for (let radius = searchRadius; radius <= searchRadius + 30; radius += 5) {
           const testX = end.x + Math.cos(angle) * radius;
@@ -287,26 +331,28 @@ const NavigationDemo = () => {
     return beams;
   }, [obstacles, FIELD_WIDTH, FIELD_HEIGHT]);
 
-  // Local path planning
-  const generateLocalPath = useCallback((robotPos, globalPath) => {
-    if (globalPath.length === 0) return [];
+  // FIXED: Local path planning that creates actual local waypoints
+  const generateLocalPath = useCallback((robotPos, globalPath, currentIndex) => {
+    if (globalPath.length === 0 || currentIndex >= globalPath.length) return [];
     
-    const lookAheadDistance = 40;
     const localPoints = [];
+    const maxLocalPoints = 4; // Limit local path length
     
-    for (let i = 0; i < globalPath.length; i++) {
+    // Start from current global path index
+    for (let i = currentIndex; i < Math.min(globalPath.length, currentIndex + maxLocalPoints); i++) {
       const point = globalPath[i];
       const distance = Math.sqrt(
         Math.pow(point.x - robotPos.x, 2) + Math.pow(point.y - robotPos.y, 2)
       );
       
-      if (distance <= lookAheadDistance) {
-        localPoints.push(point);
+      // Include points within look-ahead distance
+      if (distance <= LOOK_AHEAD_DISTANCE || i === currentIndex) {
+        localPoints.push({ ...point, globalIndex: i });
       }
     }
     
-    return localPoints.slice(0, 3);
-  }, []);
+    return localPoints;
+  }, [LOOK_AHEAD_DISTANCE]);
 
   // Check if robot can move in desired direction
   const canMoveTowards = useCallback((from, to) => {
@@ -324,37 +370,109 @@ const NavigationDemo = () => {
     return !isPointInObstacle(newX, newY, ROBOT_RADIUS);
   }, [isPointInObstacle, ROBOT_RADIUS, ROBOT_SPEED]);
 
-  // Generate recovery path by going backwards
+  // Enhanced recovery path with obstacle avoidance and escape maneuvers
   const generateRecoveryPath = useCallback((robotPos, globalPath, currentIndex) => {
-    const backtrackSteps = Math.min(5, currentIndex);
     const recoveryPoints = [];
     
-    // Go back along the path
-    for (let i = 1; i <= backtrackSteps; i++) {
-      const backIndex = Math.max(0, currentIndex - i);
-      if (globalPath[backIndex]) {
-        recoveryPoints.push(globalPath[backIndex]);
-      }
-    }
+    // Step 1: Immediate escape - move away from closest obstacle
+    let closestObstacle = null;
+    let minDistance = Infinity;
     
-    // Add a safe point away from obstacles
-    if (recoveryPoints.length > 0) {
-      const lastPoint = recoveryPoints[recoveryPoints.length - 1];
-      const safeAngles = [0, Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4];
+    obstacles.forEach(obs => {
+      const closestX = Math.max(obs.x, Math.min(robotPos.x, obs.x + obs.width));
+      const closestY = Math.max(obs.y, Math.min(robotPos.y, obs.y + obs.height));
+      const distance = Math.sqrt(
+        Math.pow(robotPos.x - closestX, 2) + Math.pow(robotPos.y - closestY, 2)
+      );
       
-      for (const angle of safeAngles) {
-        const safeX = lastPoint.x + Math.cos(angle) * 30;
-        const safeY = lastPoint.y + Math.sin(angle) * 30;
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestObstacle = { obs, closestX, closestY, distance };
+      }
+    });
+    
+    // If very close to obstacle, add escape point
+    if (closestObstacle && closestObstacle.distance < ROBOT_RADIUS * 2) {
+      const escapeDistance = ROBOT_RADIUS * 4;
+      const awayX = robotPos.x - closestObstacle.closestX;
+      const awayY = robotPos.y - closestObstacle.closestY;
+      const awayLength = Math.sqrt(awayX * awayX + awayY * awayY);
+      
+      if (awayLength > 0) {
+        const escapeX = robotPos.x + (awayX / awayLength) * escapeDistance;
+        const escapeY = robotPos.y + (awayY / awayLength) * escapeDistance;
         
-        if (!isPointInObstacle(safeX, safeY, ROBOT_RADIUS)) {
-          recoveryPoints.push({ x: safeX, y: safeY });
-          break;
+        // Check if escape point is safe
+        if (!isPointInObstacle(escapeX, escapeY, ROBOT_RADIUS)) {
+          recoveryPoints.push({ x: escapeX, y: escapeY });
+        } else {
+          // Try perpendicular escape directions
+          const perpAngle1 = Math.atan2(awayY, awayX) + Math.PI / 2;
+          const perpAngle2 = Math.atan2(awayY, awayX) - Math.PI / 2;
+          
+          for (const angle of [perpAngle1, perpAngle2]) {
+            const perpX = robotPos.x + Math.cos(angle) * escapeDistance;
+            const perpY = robotPos.y + Math.sin(angle) * escapeDistance;
+            
+            if (!isPointInObstacle(perpX, perpY, ROBOT_RADIUS)) {
+              recoveryPoints.push({ x: perpX, y: perpY });
+              break;
+            }
+          }
         }
       }
     }
     
+    // Step 2: Find safe backtrack point along path
+    const backtrackDistance = ROBOT_SIZE * 2;
+    let distanceCovered = 0;
+    let backtrackIndex = Math.max(0, currentIndex - 1);
+    
+    while (backtrackIndex >= 0 && distanceCovered < backtrackDistance) {
+      const point = globalPath[backtrackIndex];
+      if (point && !isPointInObstacle(point.x, point.y, ROBOT_RADIUS * 1.2)) {
+        // Check if path to this point is clear
+        if (recoveryPoints.length === 0 || isLineOfSightClear(recoveryPoints[recoveryPoints.length - 1], point)) {
+          recoveryPoints.push(point);
+          break;
+        }
+      }
+      
+      if (backtrackIndex > 0) {
+        const prevPoint = globalPath[backtrackIndex - 1];
+        if (prevPoint) {
+          const segmentDistance = Math.sqrt(
+            Math.pow(point.x - prevPoint.x, 2) + Math.pow(point.y - prevPoint.y, 2)
+          );
+          distanceCovered += segmentDistance;
+        }
+      }
+      backtrackIndex--;
+    }
+    
+    // Step 3: If still no safe point, try circular search for open space
+    if (recoveryPoints.length === 0) {
+      const searchRadii = [ROBOT_SIZE * 1.5, ROBOT_SIZE * 2, ROBOT_SIZE * 3];
+      const searchAngles = [0, Math.PI/4, Math.PI/2, 3*Math.PI/4, Math.PI, 5*Math.PI/4, 3*Math.PI/2, 7*Math.PI/4];
+      
+      for (const radius of searchRadii) {
+        let foundSafe = false;
+        for (const angle of searchAngles) {
+          const testX = robotPos.x + Math.cos(angle) * radius;
+          const testY = robotPos.y + Math.sin(angle) * radius;
+          
+          if (!isPointInObstacle(testX, testY, ROBOT_RADIUS)) {
+            recoveryPoints.push({ x: testX, y: testY });
+            foundSafe = true;
+            break;
+          }
+        }
+        if (foundSafe) break;
+      }
+    }
+    
     return recoveryPoints;
-  }, [isPointInObstacle, ROBOT_RADIUS]);
+  }, [obstacles, isPointInObstacle, isLineOfSightClear, ROBOT_RADIUS, ROBOT_SIZE]);
 
   // Animation loop
   useEffect(() => {
@@ -372,9 +490,11 @@ const NavigationDemo = () => {
         if (distanceToGoal < GOAL_THRESHOLD) {
           setIsNavigating(false);
           setLocalPath([]);
-          setCurrentPathIndex(0);
+          setCurrentGlobalIndex(0);
+          setCurrentLocalIndex(0);
           setRecoveryMode(false);
           setRecoveryPath([]);
+          setRecoveryIndex(0);
           setBlockedAttempts(0);
           return prevRobot;
         }
@@ -383,26 +503,25 @@ const NavigationDemo = () => {
         const lidarData = simulateLidar(prevRobot);
         setSensorData({ lidar: lidarData });
         
-        // Generate local path
-        const newLocalPath = generateLocalPath(prevRobot, globalPath);
-        setLocalPath(newLocalPath);
-
         // Handle recovery mode
         if (recoveryMode) {
-          if (recoveryPath.length > 0 && recoverySteps < recoveryPath.length) {
-            const recoveryTarget = recoveryPath[recoverySteps];
+          if (recoveryPath.length > 0 && recoveryIndex < recoveryPath.length) {
+            const recoveryTarget = recoveryPath[recoveryIndex];
+            
+            // Use slightly higher speed for recovery
+            const recoverySpeed = ROBOT_SPEED * 1.2;
             
             if (canMoveTowards(prevRobot, recoveryTarget)) {
               const dx = recoveryTarget.x - prevRobot.x;
               const dy = recoveryTarget.y - prevRobot.y;
               const distance = Math.sqrt(dx * dx + dy * dy);
               
-              if (distance < 10) {
-                setRecoverySteps(prev => prev + 1);
+              if (distance < WAYPOINT_TOLERANCE) {
+                setRecoveryIndex(prev => prev + 1);
               }
               
-              const moveX = (dx / distance) * ROBOT_SPEED;
-              const moveY = (dy / distance) * ROBOT_SPEED;
+              const moveX = (dx / distance) * recoverySpeed;
+              const moveY = (dy / distance) * recoverySpeed;
               const newAngle = Math.atan2(dy, dx);
               
               return {
@@ -410,16 +529,22 @@ const NavigationDemo = () => {
                 y: prevRobot.y + moveY,
                 angle: newAngle
               };
+            } else {
+              // If can't move to recovery target, regenerate recovery path
+              const newRecPath = generateRecoveryPath(prevRobot, globalPath, currentGlobalIndex);
+              setRecoveryPath(newRecPath);
+              setRecoveryIndex(0);
             }
           } else {
             // Recovery complete, replan from current position
-            console.log("Recovery complete, replanning path");
+            console.log("Recovery complete, replanning path from current position");
             const newPath = generateGlobalPath(prevRobot, goal);
             setGlobalPath(newPath);
-            setCurrentPathIndex(0);
+            setCurrentGlobalIndex(0);
+            setCurrentLocalIndex(0);
             setRecoveryMode(false);
             setRecoveryPath([]);
-            setRecoverySteps(0);
+            setRecoveryIndex(0);
             setBlockedAttempts(0);
             
             if (newPath.length === 0) {
@@ -431,22 +556,50 @@ const NavigationDemo = () => {
           return prevRobot;
         }
 
-        // Normal navigation
+        // Normal navigation - FIXED to use local path
         if (globalPath.length === 0) return prevRobot;
 
-        // Find next target point in global path
-        let targetPoint = goal;
-        for (let i = currentPathIndex; i < globalPath.length; i++) {
-          const pathPoint = globalPath[i];
-          const distanceToPathPoint = Math.sqrt(
-            Math.pow(pathPoint.x - prevRobot.x, 2) + Math.pow(pathPoint.y - prevRobot.y, 2)
+        // Generate local path based on current global position
+        const newLocalPath = generateLocalPath(prevRobot, globalPath, currentGlobalIndex);
+        setLocalPath(newLocalPath);
+
+        // FIXED: Follow local path instead of global path directly
+        let targetPoint = null;
+        
+        if (newLocalPath.length > currentLocalIndex) {
+          targetPoint = newLocalPath[currentLocalIndex];
+          
+          // Check if we've reached current local waypoint
+          const distanceToLocalWaypoint = Math.sqrt(
+            Math.pow(targetPoint.x - prevRobot.x, 2) + Math.pow(targetPoint.y - prevRobot.y, 2)
           );
           
-          if (distanceToPathPoint > 15) {
-            targetPoint = pathPoint;
-            setCurrentPathIndex(i);
-            break;
+          if (distanceToLocalWaypoint < WAYPOINT_TOLERANCE) {
+            // Move to next local waypoint
+            if (currentLocalIndex < newLocalPath.length - 1) {
+              setCurrentLocalIndex(prev => prev + 1);
+              targetPoint = newLocalPath[currentLocalIndex + 1];
+            } else {
+              // Update global index and reset local index
+              const newGlobalIndex = Math.min(currentGlobalIndex + 2, globalPath.length - 1);
+              setCurrentGlobalIndex(newGlobalIndex);
+              setCurrentLocalIndex(0);
+              
+              // Use goal as target if we're near the end
+              if (newGlobalIndex >= globalPath.length - 1) {
+                targetPoint = goal;
+              } else {
+                targetPoint = globalPath[newGlobalIndex];
+              }
+            }
           }
+        } else {
+          // Fallback to global path if local path is empty
+          targetPoint = globalPath[Math.min(currentGlobalIndex, globalPath.length - 1)];
+        }
+        
+        if (!targetPoint) {
+          targetPoint = goal;
         }
         
         // Check if robot can move towards target
@@ -456,10 +609,10 @@ const NavigationDemo = () => {
           // Enter recovery mode after 3 blocked attempts
           if (blockedAttempts >= 3) {
             console.log("Robot blocked, entering recovery mode");
-            const recPath = generateRecoveryPath(prevRobot, globalPath, currentPathIndex);
+            const recPath = generateRecoveryPath(prevRobot, globalPath, currentGlobalIndex);
             setRecoveryPath(recPath);
             setRecoveryMode(true);
-            setRecoverySteps(0);
+            setRecoveryIndex(0);
             setBlockedAttempts(0);
           }
           
@@ -509,10 +662,11 @@ const NavigationDemo = () => {
     isNavigating, 
     goal, 
     globalPath, 
-    currentPathIndex, 
+    currentGlobalIndex,
+    currentLocalIndex,
     recoveryMode,
     recoveryPath,
-    recoverySteps,
+    recoveryIndex,
     blockedAttempts,
     simulateLidar, 
     generateLocalPath, 
@@ -520,7 +674,8 @@ const NavigationDemo = () => {
     generateRecoveryPath,
     generateGlobalPath,
     GOAL_THRESHOLD, 
-    ROBOT_SPEED
+    ROBOT_SPEED,
+    WAYPOINT_TOLERANCE
   ]);
 
   // Handle canvas click
@@ -533,7 +688,7 @@ const NavigationDemo = () => {
     // Reset recovery state on new goal
     setRecoveryMode(false);
     setRecoveryPath([]);
-    setRecoverySteps(0);
+    setRecoveryIndex(0);
     setBlockedAttempts(0);
     
     // Check if click is not on an obstacle
@@ -544,7 +699,8 @@ const NavigationDemo = () => {
       // Generate global path
       const path = generateGlobalPath(robot, newGoal);
       setGlobalPath(path);
-      setCurrentPathIndex(0);
+      setCurrentGlobalIndex(0);
+      setCurrentLocalIndex(0);
       
       if (path.length > 0) {
         setIsNavigating(true);
@@ -599,8 +755,8 @@ const NavigationDemo = () => {
     // Draw global path
     if (globalPath.length > 1) {
       ctx.strokeStyle = '#3b82f6';
-      ctx.lineWidth = 3;
-      ctx.setLineDash([5, 5]);
+      ctx.lineWidth = 2;
+      ctx.setLineDash([8, 4]);
       ctx.beginPath();
       ctx.moveTo(globalPath[0].x, globalPath[0].y);
       globalPath.forEach(point => ctx.lineTo(point.x, point.y));
@@ -620,14 +776,23 @@ const NavigationDemo = () => {
       ctx.setLineDash([]);
     }
     
-    // Draw local path
+    // Draw local path (more prominent since robot follows this)
     if (localPath.length > 0) {
       ctx.strokeStyle = '#10b981';
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 5;
+      ctx.setLineDash([]);
       ctx.beginPath();
       ctx.moveTo(robot.x, robot.y);
       localPath.forEach(point => ctx.lineTo(point.x, point.y));
       ctx.stroke();
+      
+      // Draw local waypoints
+      localPath.forEach((point, index) => {
+        ctx.fillStyle = index === currentLocalIndex ? '#ef4444' : '#10b981';
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
     }
     
     // Draw LiDAR beams with updated distances
@@ -684,7 +849,7 @@ const NavigationDemo = () => {
     
     ctx.restore();
     
-  }, [robot, goal, globalPath, localPath, recoveryPath, sensorData, obstacles, recoveryMode, FIELD_WIDTH, FIELD_HEIGHT, ROBOT_SIZE, GOAL_THRESHOLD]);
+  }, [robot, goal, globalPath, localPath, currentLocalIndex, recoveryPath, sensorData, obstacles, recoveryMode, FIELD_WIDTH, FIELD_HEIGHT, ROBOT_SIZE, GOAL_THRESHOLD]);
 
   return (
     <div className={styles.demoContainer}>
@@ -692,16 +857,34 @@ const NavigationDemo = () => {
         <h3>Interactive Autonomous Navigation Demo</h3>
         <p>Click anywhere in the field to set a goal for the robot</p>
       </div>
-      
+
       <div className={styles.demoContent}>
-        <canvas
-          ref={canvasRef}
-          width={FIELD_WIDTH}
-          height={FIELD_HEIGHT}
-          onClick={handleCanvasClick}
-          className={styles.demoCanvas}
-        />
-        
+        <div style={{ position: 'relative' }}>
+          <canvas
+            ref={canvasRef}
+            width={FIELD_WIDTH}
+            height={FIELD_HEIGHT}
+            onClick={handleCanvasClick}
+            className={styles.demoCanvas}
+          />
+          <div style={{
+            position: 'absolute',
+            top: 8,
+            left: 8,
+            background: 'rgba(0, 0, 0, 0.5)',
+            padding: '6px 10px',
+            borderRadius: '6px',
+            color: '#fff',
+            fontSize: '13px'
+          }}>
+            Status: {recoveryMode ? 'Recovery Mode' : (isNavigating ? 'Navigating' : 'Idle')}<br/>
+            Global Index: {currentGlobalIndex}<br/>
+            Local Index: {currentLocalIndex}
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.demoLegendWrapper}>
         <div className={styles.demoLegend}>
           <div className={styles.legendItem}>
             <div className={`${styles.legendColor} ${styles.globalPath}`}></div>
