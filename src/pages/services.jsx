@@ -1,16 +1,13 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import ServicesSection from '../components/ServicesSection';
-import NavigationDemo from '../components/NavigationDemo';
 
 const ServicesPage = () => {
   return (
     <Layout 
       pageTitle="Services"
-      pageDescription="Comprehensive consulting services including strategy, operations, technology, and change management."
+      pageDescription="Advanced engineering solutions for control systems and automation across multiple industries."
     >
-      <NavigationDemo />
-      
       <ServicesSection showAll={true} />
     </Layout>
   );
@@ -18,4 +15,4 @@ const ServicesPage = () => {
 
 export default ServicesPage;
 
-export const Head = () => <title>Services | Consulting Pro</title>;
+export const Head = () => <title>Services | Control Systems Consulting</title>;

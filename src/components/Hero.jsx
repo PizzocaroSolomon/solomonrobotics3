@@ -10,33 +10,33 @@ const Hero = () => {
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <h1 className={styles.heroTitle}>
-              Autonomous Systems & Mobile Robotics Consultant
+              Advanced Control Systems & Engineering Solutions
             </h1>
             <p className={styles.heroSubtitle}>
-              From Research to Production - Transforming Complex Robotics Challenges 
-              into Reliable Solutions. PhD in Systems & Control with proven industry 
-              experience in autonomous driving and agricultural robotics.
+              We specialize in cutting-edge control systems engineering, from autonomous 
+              driving and sensor fusion to embedded software and AI integration. 
+              Transforming complex engineering challenges into reliable, production-ready solutions.
             </p>
             <div className={styles.heroStats}>
               <div className={styles.stat}>
-                <span className={styles.statNumber}>PhD</span>
-                <span className={styles.statLabel}>Systems & Control</span>
+                <span className={styles.statNumber}>8+</span>
+                <span className={styles.statLabel}>Core Services</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statNumber}>5+</span>
-                <span className={styles.statLabel}>Years Experience</span>
+                <span className={styles.statNumber}>15+</span>
+                <span className={styles.statLabel}>Projects Delivered</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statNumber}>BMW</span>
-                <span className={styles.statLabel}>Industry Partner</span>
+                <span className={styles.statNumber}>100%</span>
+                <span className={styles.statLabel}>Client Satisfaction</span>
               </div>
             </div>
             <div className={styles.heroCtas}>
-              <Link to="/about" className={`${styles.ctaButton} ${styles.ctaPrimary}`}>
-                View My Experience
+              <Link to="/services" className={`${styles.ctaButton} ${styles.ctaPrimary}`}>
+                Our Services
               </Link>
-              <Link to="/services" className={`${styles.ctaButton} ${styles.ctaSecondary}`}>
-                Consulting Services
+              <Link to="/portfolio" className={`${styles.ctaButton} ${styles.ctaSecondary}`}>
+                View Our Work
               </Link>
             </div>
           </div>

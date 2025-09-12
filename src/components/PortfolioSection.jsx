@@ -5,7 +5,15 @@ import * as styles from '../styles/portfolio.module.css';
 import * as utils from '../styles/utils.module.css';
 
 const PortfolioSection = ({ showAll = false }) => {
-  const displayProjects = showAll ? portfolioData : portfolioData.slice(0, 3);
+  // Add slug generation for portfolio items
+  const portfolioWithSlugs = portfolioData.map(project => ({
+    ...project,
+    slug: project.title.toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+  }));
+
+  const displayProjects = showAll ? portfolioWithSlugs : portfolioWithSlugs.slice(0, 3);
   
   return (
     <section id="portfolio" className={styles.portfolioSection}>
@@ -13,7 +21,7 @@ const PortfolioSection = ({ showAll = false }) => {
         <div className={styles.portfolioHeader}>
           <h2>Our Work</h2>
           <p className={styles.portfolioSubtitle}>
-            Recent projects that showcase our expertise and results
+            Recent projects showcasing our expertise in control systems and automation
           </p>
         </div>
         
@@ -30,8 +38,8 @@ const PortfolioSection = ({ showAll = false }) => {
               <div className={styles.projectContent}>
                 <h3>{project.title}</h3>
                 <p>{showAll ? project.fullDescription : project.excerpt}</p>
-                <Link to="/portfolio" className={styles.readMoreButton}>
-                  Read More
+                <Link to={`/work/${project.slug}`} className={styles.readMoreButton}>
+                  View Project
                 </Link>
               </div>
             </div>

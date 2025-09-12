@@ -13,7 +13,7 @@ const ServicesSection = ({ showAll = false }) => {
         <div className={styles.servicesHeader}>
           <h2>Our Services</h2>
           <p className={styles.servicesSubtitle}>
-            Comprehensive consulting solutions tailored to your business needs
+            Advanced engineering solutions for control systems and automation
           </p>
         </div>
         
@@ -22,7 +22,7 @@ const ServicesSection = ({ showAll = false }) => {
             <div key={service.id} className={styles.serviceCard}>
               <h3>{service.title}</h3>
               <p>{showAll ? service.fullDescription : service.excerpt}</p>
-              <Link to="/services" className={styles.readMoreButton}>
+              <Link to={`/services/${service.slug}`} className={styles.readMoreButton}>
                 Read More
               </Link>
             </div>

@@ -4,6 +4,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .headerContent {
@@ -13,10 +14,52 @@
   padding: 1rem 0;
 }
 
-.logo h1 {
+/* Logo Styles */
+.logo {
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logoIcon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.logo:hover .logoIcon {
+  transform: scale(1.05);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.companyName {
+  font-size: 1.2rem;
+  font-weight: 700;
   color: #0066cc;
-  margin: 0;
-  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  margin-bottom: -2px;
+}
+
+.companyTagline {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #666;
+  font-style: italic;
+  letter-spacing: 0.25px;
 }
 
 .nav {
@@ -29,6 +72,7 @@
   gap: 2rem;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .navLink {
@@ -36,6 +80,7 @@
   font-weight: 500;
   padding: 0.5rem 0;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .navLink:hover,
@@ -45,6 +90,83 @@
 
 .navLinkActive {
   color: #0066cc;
+}
+
+/* Dropdown Styles */
+.dropdownContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdownTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+}
+
+.dropdownIcon {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+  margin-left: 0.25rem;
+}
+
+.dropdownContainer:hover .dropdownIcon {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  min-width: 250px;
+  z-index: 1000;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: all 0.2s ease;
+}
+
+.dropdownContainer:hover .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdownMenu li {
+  margin: 0;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #333;
+  font-weight: 400;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  white-space: nowrap;
+}
+
+.dropdownLink:hover,
+.dropdownLink:focus-visible {
+  background-color: #f8f9fa;
+  color: #0066cc;
+  border-left-color: #0066cc;
+  text-decoration: none;
 }
 
 .menuToggle {
@@ -73,10 +195,35 @@
   right: 0;
   background-color: #fff;
   border: 1px solid #e5e5e5;
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   min-width: 200px;
+}
+
+/* Mobile dropdown handling */
+.navListOpen .dropdownContainer {
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.navListOpen .dropdownMenu {
+  position: static;
+  transform: none;
+  box-shadow: none;
+  border: none;
+  background-color: #f8f9fa;
+  margin: 0.5rem 0 0 0;
+  border-radius: 6px;
+  width: 100%;
+  opacity: 1;
+  visibility: visible;
+}
+
+.navListOpen .dropdownTrigger {
+  width: 100%;
+  justify-content: space-between;
+  padding: 0.5rem 0;
 }
 
 @media (min-width: 768px) {
@@ -86,5 +233,20 @@
   
   .menuToggle {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .companyName {
+    font-size: 1rem;
+  }
+  
+  .companyTagline {
+    font-size: 0.75rem;
+  }
+  
+  .logoIcon svg {
+    width: 28px;
+    height: 28px;
   }
 }
