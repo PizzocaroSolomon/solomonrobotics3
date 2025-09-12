@@ -682,26 +682,39 @@ const NavigationDemo = () => {
   const handleCanvasClick = useCallback((event) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    
+
+    let clientX, clientY;
+
+    if (event.touches && event.touches.length > 0) {
+      clientX = event.touches[0].clientX;
+      clientY = event.touches[0].clientY;
+    } else {
+      clientX = event.clientX;
+      clientY = event.clientY;
+    }
+
+    // Normalize coordinates
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
+
     // Reset recovery state on new goal
     setRecoveryMode(false);
     setRecoveryPath([]);
     setRecoveryIndex(0);
     setBlockedAttempts(0);
-    
-    // Check if click is not on an obstacle
+
     if (!isPointInObstacle(x, y, ROBOT_RADIUS)) {
       const newGoal = { x, y };
       setGoal(newGoal);
-      
-      // Generate global path
+
       const path = generateGlobalPath(robot, newGoal);
       setGlobalPath(path);
       setCurrentGlobalIndex(0);
       setCurrentLocalIndex(0);
-      
+
       if (path.length > 0) {
         setIsNavigating(true);
       } else {
@@ -711,16 +724,6 @@ const NavigationDemo = () => {
       console.log("Goal not reachable - too close to obstacle");
     }
   }, [isPointInObstacle, ROBOT_RADIUS, generateGlobalPath, robot]);
-
-  // Handle touch events for mobile
-  const handleCanvasTouch = useCallback((event) => {
-    const touch = event.touches[0];
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
-
-    handleCanvasClick({ clientX: x + rect.left, clientY: y + rect.top });
-  }, [])
 
   // Canvas drawing
   useEffect(() => {
@@ -875,7 +878,7 @@ const NavigationDemo = () => {
             width={FIELD_WIDTH}
             height={FIELD_HEIGHT}
             onClick={handleCanvasClick}
-            onTouchStart={handleCanvasTouch}
+            onTouchStart={handleCanvasClick}
             className={styles.demoCanvas}
           />
           <div style={{
