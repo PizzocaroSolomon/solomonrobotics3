@@ -25,31 +25,6 @@ const portfolioData = [
     results: ["Centimeter-level navigation accuracy", "Robust operation in GPS-denied areas", "Published research papers", "Industry partnership demonstrations"]
   },
   {
-    id: 2,
-    title: "BMW Localization Validation System",
-    slug: "bmw-localization-validation-system",
-    excerpt: "Developed and maintained localization validation software for BMW autonomous driving at Luxoft Italy.",
-    fullDescription: "Created comprehensive validation framework for BMW's autonomous driving localization systems. Optimized radar-based localization algorithm for ADAS applications, ensuring compliance with automotive standards. Implemented robust testing procedures and validation metrics to guarantee system reliability in production vehicles. Work contributed to BMW's advanced driver assistance systems deployed in commercial vehicles.",
-    image: "/images/autonomous-vehicle.jpg",
-    technologies: ["RADAR", "ADAS", "Automotive Standards", "C++", "Validation Framework"],
-    client: "BMW (via Luxoft Italy)",
-    duration: "Nov 2022 - Mar 2024",
-    industry: "Automotive",
-    challenges: [
-      "Ensuring compliance with strict automotive safety standards",
-      "Validating localization accuracy in diverse driving conditions",
-      "Optimizing real-time performance for production systems",
-      "Managing complex validation test scenarios"
-    ],
-    solutions: [
-      "Developed comprehensive validation framework with automated testing",
-      "Implemented radar-based localization algorithm optimizations",
-      "Created robust testing procedures and validation metrics",
-      "Established compliance protocols for automotive standards"
-    ],
-    results: ["Improved localization accuracy", "Automotive standard compliance", "Production system deployment", "Enhanced testing framework"]
-  },
-  {
     id: 3,
     title: "Racing Telemetry Platform",
     slug: "racing-telemetry-platform",
@@ -73,31 +48,6 @@ const portfolioData = [
       "Established containerized deployment with Docker for reliability"
     ],
     results: ["Real-time data streaming", "Interactive dashboards", "Improved testing efficiency", "Remote monitoring capabilities"]
-  },
-  {
-    id: 4,
-    title: "Autonomous Parking System",
-    slug: "autonomous-parking-system",
-    excerpt: "Developed stereo vision and 3D LiDAR-based parking algorithms during research at CU-ICAR, USA.",
-    fullDescription: "Research project at Clemson University International Center for Automotive Research (CU-ICAR) focusing on autonomous parking solutions. Supervised Master's students in developing advanced parking algorithms using stereo vision and 3D LiDAR sensors. Implemented lane-keeping control with monocular camera-based road detection. All algorithms were integrated and validated through real-world automotive testing on campus facilities.",
-    image: "/images/computer-vision.jpg",
-    technologies: ["Stereo Vision", "3D LiDAR", "Lane Detection", "Control Systems", "Real-world Testing"],
-    client: "CU-ICAR Research",
-    duration: "Jan 2019 - Aug 2019",
-    industry: "Automotive Research",
-    challenges: [
-      "Accurate vehicle positioning in tight parking spaces",
-      "Real-time processing of stereo vision and LiDAR data",
-      "Developing robust lane-keeping algorithms",
-      "Coordinating research with multiple Master's students"
-    ],
-    solutions: [
-      "Developed advanced stereo vision algorithms for precise positioning",
-      "Implemented 3D LiDAR-based environment mapping and obstacle detection",
-      "Created lane-keeping control system with monocular camera input",
-      "Established comprehensive real-world testing and validation protocols"
-    ],
-    results: ["Successful autonomous parking", "Real-world validation", "Student mentorship", "Research publications"]
   },
   {
     id: 5,
@@ -125,29 +75,29 @@ const portfolioData = [
     results: ["High-accuracy grape detection", "Robust outdoor performance", "Multi-sensor integration", "Agricultural automation advancement"]
   },
   {
-    id: 6,
-    title: "Smart Order Routing Algorithm",
-    slug: "smart-order-routing-algorithm",
-    excerpt: "Contributing to advanced trading algorithms and testing infrastructure for Capital Markets at TAS Group.",
-    fullDescription: "Current role involves designing and implementing sophisticated Smart Order Routing (SOR) algorithms for high-frequency trading platforms. Developing comprehensive testing pipelines to enable safe refactoring of legacy trading systems. Work focuses on optimizing order execution strategies and ensuring system reliability in fast-paced financial markets. Implementing modern software engineering practices in critical trading infrastructure.",
+    id: 7,
+    title: "Optimal Control Path Generation",
+    slug: "optimal-control-path-generation",
+    excerpt: "Developed and implemented optimal control and path generation algorithms for robotics applications.",
+    fullDescription: "Developed advanced optimal control and path generation algorithms for various robotics applications. Utilized Model Predictive Control (MPC) and other optimization techniques to generate smooth and efficient trajectories. Implemented real-time constraint handling and system identification methods. Validated algorithms through simulations and hardware experiments.",
     image: "/images/control-systems.jpg",
-    technologies: ["Algorithm Design", "Financial Systems", "Testing Pipelines", "Legacy System Refactoring"],
-    client: "TAS Group - Capital Markets",
-    duration: "May 2025 - Present",
-    industry: "Financial Technology",
+    technologies: ["Model Predictive Control", "Optimization Algorithms", "Robotics", "Real-time Systems", "MATLAB"],
+    client: "Various",
+    duration: "2023-2025",
+    industry: "Robotics",
     challenges: [
-      "Optimizing order execution in microsecond-critical environments",
-      "Safely refactoring legacy trading systems without disruption",
-      "Implementing comprehensive testing for financial algorithms",
-      "Ensuring regulatory compliance and system reliability"
+      "Generating smooth and efficient trajectories in real-time",
+      "Handling system constraints and uncertainties",
+      "Implementing algorithms on resource-constrained hardware",
+      "Validating algorithms through simulations and experiments"
     ],
     solutions: [
-      "Designed sophisticated Smart Order Routing algorithms for optimal execution",
-      "Developed comprehensive testing pipelines for safe system refactoring",
-      "Implemented modern software engineering practices in legacy systems",
-      "Created monitoring and validation systems for trading algorithm performance"
+      "Developed Model Predictive Control (MPC) algorithms for optimal control",
+      "Implemented real-time constraint handling methods",
+      "Utilized system identification techniques to model dynamic systems",
+      "Validated algorithms through simulations and hardware experiments"
     ],
-    results: ["Enhanced trading algorithms", "Improved system reliability", "Modernized testing infrastructure", "Optimized order execution"]
+    results: ["Smooth and efficient trajectories", "Real-time performance", "Robust constraint handling", "Successful hardware experiments"]
   }
 ];
 

@@ -11,13 +11,12 @@ const Footer = () => {
       <div className={utils.container}>
         <div className={styles.footerContent}>
           <div className={styles.footerSection}>
-            <h3>Consulting Pro</h3>
+            <h3>Solomon Pizzocaro Consulting</h3>
             <address className={styles.address}>
-              123 Business Street<br />
-              Suite 100<br />
-              Business City, BC 12345<br />
-              <a href="mailto:hello@consultingpro.com">hello@consultingpro.com</a><br />
-              <a href="tel:+1-555-123-4567">(555) 123-4567</a>
+              Via San Michele Arcangelo, 13<br />
+              Varese, VA 21100<br />
+              <a href="mailto:solomon.pizzocaro.consulting@gmail.com">solomon.pizzocaro.consulting@gmail.com</a><br />
+              <a href="tel:+39-346-638-0084">(346) 638-0084</a>
             </address>
           </div>
           

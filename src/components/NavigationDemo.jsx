@@ -867,7 +867,6 @@ const NavigationDemo = () => {
   return (
     <div className={styles.demoContainer}>
       <div className={styles.demoHeader}>
-        <h3>Interactive Autonomous Navigation Demo</h3>
         <p>Click anywhere in the field to set a goal for the robot</p>
       </div>
 

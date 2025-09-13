@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Layout from '../components/Layout';
 import NavigationDemo from '../components/NavigationDemo';
+import PerceptionDemo from './SensorFusionDemo';
 import * as styles from '../styles/service-template.module.css';
 import * as utils from '../styles/utils.module.css';
+import SensorFusionDemo from './SensorFusionDemo';
 
 const ServiceTemplate = ({ service, allServices }) => {
   const otherServices = allServices.filter(s => s.id !== service.id);
@@ -13,6 +15,10 @@ const ServiceTemplate = ({ service, allServices }) => {
     
     if (service.demoComponent === 'NavigationDemo') {
       return <NavigationDemo />;
+    }
+
+    if (service.demoComponent === 'SensorFusionDemo') {
+      return <SensorFusionDemo />;
     }
     
     return null;

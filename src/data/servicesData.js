@@ -71,8 +71,8 @@ const servicesData = [
       "Maritime navigation"
     ],
     technologies: ["Kalman Filters", "Particle Filters", "OpenCV", "PCL", "Eigen", "ROS"],
-    hasDemo: false,
-    demoComponent: null
+    hasDemo: true,
+    demoComponent: "SensorFusionDemo"
   },
   {
     id: 4,

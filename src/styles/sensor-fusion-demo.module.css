@@ -1,0 +1,128 @@
+.demoContainer {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+}
+
+.demoHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.demoHeader h3 {
+  color: #64b5f6;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.demoHeader p {
+  font-size: 1.125rem;
+  opacity: 0.8;
+}
+
+.demoContent {
+  display: flex;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.demoCanvas {
+  border: 2px solid #64b5f6;
+  border-radius: 8px;
+  cursor: crosshair;
+  background: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.demoCanvas:hover {
+  border-color: #42a5f5;
+}
+
+.demoLegendWrapper {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.demoLegend {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+.legendColor {
+  width: 16px;
+  height: 3px;
+  margin-right: 0.5rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legendColor.globalPath {
+  background: #3b82f6;
+  border: 1px dashed #3b82f6;
+  height: 2px;
+}
+
+.legendColor.localPath {
+  background: #10b981;
+  height: 4px;
+}
+
+.legendColor.recoveryPath {
+  background: #f97316;
+  height: 2px;
+}
+
+.legendColor.lidar {
+  background: #ef4444;
+  height: 2px;
+}
+
+.legendColor.goal {
+  background: #10b981;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}
+
+@media (max-width: 768px) {
+  .demoContent {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .demoCanvas {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+  }
+
+  .demoLegendWrapper {
+    justify-content: center;
+  }
+
+  .demoLegend {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+}

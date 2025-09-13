@@ -140,17 +140,16 @@ const ContactSection = () => {
             <div className={styles.contactDetails}>
               <p>
                 <strong>Email:</strong><br />
-                <a href="mailto:hello@consultingpro.com">hello@consultingpro.com</a>
+                <a href="mailto:solomon.pizzocaro.consulting@gmail.com">solomon.pizzocaro.consulting@gmail.com</a>
               </p>
               <p>
                 <strong>Phone:</strong><br />
-                <a href="tel:+1-555-123-4567">(555) 123-4567</a>
+                <a href="tel:+39-346-638-0084">(346) 638-0084</a>
               </p>
               <p>
                 <strong>Address:</strong><br />
-                123 Business Street<br />
-                Suite 100<br />
-                Business City, BC 12345
+                Via San Michele Arcangelo, 13<br />
+                Varese, VA 21100
               </p>
             </div>
           </div>
