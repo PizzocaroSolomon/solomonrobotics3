@@ -10,21 +10,21 @@ const Hero = () => {
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <h1 className={styles.heroTitle}>
-              Advanced Control Systems & Engineering Solutions
+              Advanced Engineering Solutions for Autonomous Systems
             </h1>
             <p className={styles.heroSubtitle}>
-              We specialize in cutting-edge control systems engineering, from autonomous 
-              driving and sensor fusion to embedded software and AI integration. 
-              Transforming complex engineering challenges into reliable, production-ready solutions.
+              We deliver comprehensive engineering solutions spanning embedded systems, 
+              autonomous robotics, artificial intelligence, and data analytics. 
+              Transforming complex technical challenges into robust, production-ready systems.
             </p>
             <div className={styles.heroStats}>
               <div className={styles.stat}>
-                <span className={styles.statNumber}>8+</span>
+                <span className={styles.statNumber}>4</span>
                 <span className={styles.statLabel}>Core Services</span>
               </div>
               <div className={styles.stat}>
-                <span className={styles.statNumber}>15+</span>
-                <span className={styles.statLabel}>Projects Delivered</span>
+                <span className={styles.statNumber}>10+</span>
+                <span className={styles.statLabel}>Years Experience</span>
               </div>
               <div className={styles.stat}>
                 <span className={styles.statNumber}>100%</span>

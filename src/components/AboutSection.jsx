@@ -8,12 +8,13 @@ const AboutSection = () => {
     <section id="about" className={styles.aboutSection}>
       <div className={utils.container}>
         <div className={styles.aboutContent}>
-          <h2>About Our Company</h2>
+          <h2>About Our Expertise</h2>
           <p className={styles.aboutText}>
-            With over a decade of experience in business consulting, we've helped 
-            hundreds of companies streamline their operations, increase efficiency, 
-            and achieve sustainable growth. Our team of experts brings deep industry 
-            knowledge and proven methodologies to every project.
+            We are a specialized engineering consultancy focused on embedded systems, 
+            autonomous robotics, artificial intelligence, and data analytics. Our expertise 
+            spans the complete development lifecycle from system architecture and embedded 
+            software to AI integration and real-time data platforms. We deliver solutions 
+            that combine cutting-edge technology with practical engineering excellence.
           </p>
           <Link to="/about" className={styles.learnMoreButton}>
             Learn More About Us

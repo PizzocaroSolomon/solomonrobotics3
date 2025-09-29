@@ -1,201 +1,101 @@
 const servicesData = [
   {
     id: 1,
-    title: "Embedded Software Development",
-    slug: "embedded-software-development",
-    excerpt: "Real-time embedded systems for industrial automation, robotics, and IoT applications with safety-critical requirements.",
-    fullDescription: "We develop robust embedded software solutions for microcontrollers and embedded systems across various industries. Our expertise includes real-time operating systems, device drivers, communication protocols, and safety-critical applications. We work with ARM Cortex, ESP32, STM32, and other popular platforms to deliver reliable and efficient embedded solutions.",
+    title: "Embedded & Systems Engineering",
+    slug: "embedded-systems-engineering",
+    excerpt: "Design and development of embedded software and system-level solutions that ensure efficiency, stability, and seamless hardware–software integration.",
+    fullDescription: "Comprehensive expertise in embedded systems engineering, spanning from low-level driver development to application software for real-time platforms. Our solutions include C/C++ programming, Linux-based environments, with emphasis on performance, safety, and maintainability. We integrate DevOps practices and CI/CD pipelines for automated testing, continuous validation, and reliable deployments. This approach enables faster development cycles, robust system operation, and long-term scalability across automotive, robotics, and industrial automation industries.",
     keyFeatures: [
-      "Real-time system development",
-      "Safety-critical applications",
-      "Device driver development",
-      "Communication protocols (CAN, I2C, SPI, UART)",
-      "Low-power optimization",
-      "Hardware abstraction layers"
+      "Low-level driver development for real-time platforms",
+      "C/C++ programming for embedded systems",
+      "Linux-based embedded environments",
+      "DevOps practices and CI/CD pipelines",
+      "Automated testing and continuous validation",
+      "Performance optimization and safety-critical design"
     ],
     applications: [
+      "Automotive embedded systems",
       "Industrial automation controllers",
       "Robotics control units",
-      "IoT sensor nodes",
-      "Automotive ECUs",
-      "Medical devices"
+      "Real-time operating systems",
+      "Safety-critical applications"
     ],
-    technologies: ["C/C++", "FreeRTOS", "ARM Cortex", "STM32", "ESP32", "CAN Bus", "Modbus"],
+    technologies: ["C/C++", "Linux", "Real-time OS", "DevOps", "CI/CD", "GitLab", "Jenkins"],
     hasDemo: false,
     demoComponent: null
   },
   {
     id: 2,
-    title: "Autonomous Driving",
-    slug: "autonomous-driving",
-    excerpt: "End-to-end autonomous navigation systems for mobile robots, agricultural vehicles, and autonomous cars.",
-    fullDescription: "Complete autonomous driving solutions from perception to control. We design and implement sophisticated navigation algorithms that handle complex environments including urban settings, agricultural fields, and industrial facilities. Our systems integrate multiple sensors and use advanced path planning algorithms to ensure safe and efficient navigation.",
+    title: "Autonomous Systems & Robotics",
+    slug: "autonomous-systems-robotics",
+    excerpt: "Development of intelligent systems for vehicles and robots that combine perception, localization, and control algorithms to enable safe and reliable autonomy.",
+    fullDescription: "Expertise in creating autonomous systems that integrate multi-sensor perception, SLAM, and advanced planning algorithms. We fuse data from LiDAR, radar, cameras, and GNSS/IMU to generate accurate real-time environmental models that support navigation and decision-making in complex scenarios. Our solutions are built on modular frameworks like ROS2, ensuring scalability and smooth integration into robotics and automotive ecosystems. We emphasize adaptability, robustness, and industry standard compliance, enabling both research-driven innovation and real-world deployment in self-driving vehicles, mobile robots, and industrial automation.",
     keyFeatures: [
-      "Multi-sensor fusion (LiDAR, cameras, RADAR)",
-      "Real-time path planning and obstacle avoidance",
-      "Localization and mapping (SLAM)",
-      "Behavioral decision making",
-      "Safety-critical system design",
-      "Weather and lighting adaptability"
+      "Multi-sensor perception with LiDAR, radar, and cameras",
+      "SLAM (Simultaneous Localization and Mapping)",
+      "Advanced path planning and navigation algorithms",
+      "GNSS/IMU sensor fusion for accurate localization",
+      "ROS2-based modular architecture",
+      "Real-time environmental modeling and decision-making"
     ],
     applications: [
-      "Autonomous agricultural vehicles",
-      "Warehouse automation robots",
-      "Autonomous passenger vehicles",
-      "Mining and construction vehicles",
-      "Security patrol robots"
+      "Self-driving vehicles",
+      "Mobile autonomous robots",
+      "Industrial automation systems",
+      "Agricultural robotics",
+      "Warehouse automation"
     ],
-    technologies: ["ROS", "C++", "Python", "SLAM", "A*", "RRT*", "Kalman Filters"],
+    technologies: ["ROS2", "LiDAR", "RADAR", "GNSS/IMU", "SLAM", "Computer Vision", "C++", "Python"],
     hasDemo: true,
     demoComponent: "NavigationDemo"
   },
   {
     id: 3,
-    title: "Advanced Sensor Fusion",
-    slug: "advanced-sensor-fusion",
-    excerpt: "Multi-modal sensor integration combining LiDAR, cameras, IMU, GNSS, and RADAR for robust perception systems.",
-    fullDescription: "We develop sophisticated sensor fusion algorithms that combine data from multiple sensors to create robust and accurate perception systems. Our solutions handle sensor failures, environmental challenges, and provide reliable state estimation even in GPS-denied environments.",
+    title: "Artificial Intelligence & Data Analytics",
+    slug: "ai-data-analytics",
+    excerpt: "AI and machine learning solutions that automate processes, predict outcomes, and generate actionable insights to improve efficiency and decision-making.",
+    fullDescription: "We integrate AI technologies into business and industrial systems, focusing on Natural Language Processing (NLP) and Machine Learning (ML). Our NLP solutions embed intelligent assistants and text analysis tools into workflows, automating repetitive tasks, improving knowledge access, and boosting productivity. For ML applications, we apply predictive models to industrial contexts for fault detection, anomaly identification, demand forecasting, and process optimization. All solutions are designed for scalability and maintainability, with continuous monitoring and retraining strategies ensuring long-term reliability. This approach helps organizations reduce downtime, optimize resources, and leverage data for strategic decision-making.",
     keyFeatures: [
-      "Multi-modal sensor integration",
-      "Extended Kalman Filter implementation",
-      "Particle filter algorithms",
-      "Sensor failure detection and recovery",
-      "Real-time processing optimization",
-      "Calibration and synchronization"
+      "Natural Language Processing (NLP) for intelligent assistants",
+      "Machine Learning for predictive analytics",
+      "Fault detection and anomaly identification",
+      "Demand forecasting and process optimization",
+      "Continuous monitoring and model retraining",
+      "Scalable and maintainable AI solutions"
     ],
     applications: [
-      "Autonomous vehicle localization",
-      "Drone navigation systems",
-      "Industrial robot positioning",
-      "Augmented reality systems",
-      "Maritime navigation"
+      "Intelligent workflow automation",
+      "Predictive maintenance systems",
+      "Process optimization",
+      "Demand forecasting",
+      "Anomaly detection in industrial systems"
     ],
-    technologies: ["Kalman Filters", "Particle Filters", "OpenCV", "PCL", "Eigen", "ROS"],
-    hasDemo: true,
-    demoComponent: "SensorFusionDemo"
+    technologies: ["Python", "TensorFlow", "PyTorch", "NLP", "Machine Learning", "scikit-learn", "MLOps"],
+    hasDemo: false,
+    demoComponent: null
   },
   {
     id: 4,
-    title: "Advanced Control Systems",
-    slug: "advanced-control-systems",
-    excerpt: "Model Predictive Control (MPC), adaptive control, and optimization algorithms for complex dynamic systems.",
-    fullDescription: "We design and implement advanced control strategies including Model Predictive Control, adaptive control, and robust control systems. Our solutions optimize performance while respecting system constraints and handling uncertainties in real-time applications.",
+    title: "Data Platforms & Visualization",
+    slug: "data-platforms-visualization",
+    excerpt: "Custom telemetry, post-processing, and visualization tools that transform raw data into clear insights and actionable intelligence.",
+    fullDescription: "We develop complete data platforms that manage the entire lifecycle from telemetry and real-time data acquisition to advanced post-processing and analytics. Our tailored software tools enable in-depth data analysis, with visualization dashboards designed for both technical and non-technical users. These solutions identify anomalies, evaluate system performance, and extract trends from complex datasets. By converting raw information into accessible insights, organizations can make faster, more informed decisions, improve operational efficiency, and support continuous optimization across their processes.",
     keyFeatures: [
-      "Model Predictive Control (MPC)",
-      "Adaptive and robust control",
-      "Multi-objective optimization",
-      "Constraint handling",
-      "Real-time implementation",
-      "System identification"
+      "Real-time telemetry and data acquisition",
+      "Advanced post-processing and analytics",
+      "Custom visualization dashboards",
+      "Anomaly detection and performance evaluation",
+      "Trend analysis from complex datasets",
+      "User-friendly interfaces for technical and non-technical users"
     ],
     applications: [
-      "Industrial process control",
-      "Automotive powertrain control",
-      "Energy management systems",
-      "Climate control systems",
-      "Robotic manipulator control"
-    ],
-    technologies: ["MATLAB/Simulink", "CasADi", "CVXPY", "C++", "Real-time Systems"],
-    hasDemo: false,
-    demoComponent: null
-  },
-  {
-    id: 5,
-    title: "AI Integration",
-    slug: "ai-integration",
-    excerpt: "Machine learning and deep learning integration into embedded systems and real-time control applications.",
-    fullDescription: "We integrate artificial intelligence and machine learning algorithms into control systems and embedded applications. Our approach focuses on practical AI solutions that can run efficiently on resource-constrained hardware while maintaining real-time performance requirements.",
-    keyFeatures: [
-      "Edge AI deployment",
-      "Neural network optimization",
-      "Real-time inference",
-      "Model quantization and pruning",
-      "Reinforcement learning for control",
-      "Predictive maintenance algorithms"
-    ],
-    applications: [
-      "Predictive maintenance systems",
-      "Intelligent process optimization",
-      "Adaptive control systems",
-      "Anomaly detection",
-      "Quality control automation"
-    ],
-    technologies: ["TensorFlow Lite", "PyTorch", "ONNX", "OpenVINO", "CUDA", "Python"],
-    hasDemo: false,
-    demoComponent: null
-  },
-  {
-    id: 6,
-    title: "Computer Vision for Robotics",
-    slug: "computer-vision-robotics",
-    excerpt: "Deep learning-based vision systems for object detection, tracking, and scene understanding in robotics applications.",
-    fullDescription: "We develop computer vision solutions specifically tailored for robotics applications. Our systems handle challenging lighting conditions, moving objects, and provide real-time performance for navigation, manipulation, and inspection tasks.",
-    keyFeatures: [
-      "Object detection and tracking",
-      "3D scene reconstruction",
-      "Visual servoing",
-      "Stereo vision processing",
-      "Real-time image processing",
-      "Deep learning model deployment"
-    ],
-    applications: [
-      "Robotic pick-and-place systems",
-      "Quality inspection automation",
-      "Navigation and obstacle detection",
-      "Human-robot interaction",
-      "Agricultural monitoring"
-    ],
-    technologies: ["OpenCV", "TensorFlow", "PyTorch", "ROS", "PCL", "YOLO"],
-    hasDemo: false,
-    demoComponent: null
-  },
-  {
-    id: 7,
-    title: "Telemetry and Data Visualization",
-    slug: "telemetry-data-visualization",
-    excerpt: "Real-time monitoring systems and interactive dashboards for industrial systems and robotics fleets.",
-    fullDescription: "We create comprehensive telemetry and visualization solutions that provide real-time insights into system performance. Our dashboards enable operators to monitor, analyze, and optimize system behavior with intuitive interfaces and powerful analytics capabilities.",
-    keyFeatures: [
-      "Real-time data streaming",
-      "Interactive dashboards",
-      "Historical data analysis",
-      "Alert and notification systems",
-      "Mobile-responsive interfaces",
-      "Data export and reporting"
-    ],
-    applications: [
-      "Fleet management systems",
       "Industrial process monitoring",
-      "Energy management dashboards",
-      "Equipment health monitoring",
-      "Performance analytics"
+      "Fleet management systems",
+      "Performance analytics platforms",
+      "Real-time system monitoring",
+      "Data-driven decision support systems"
     ],
-    technologies: ["React", "Node.js", "WebSockets", "InfluxDB", "Grafana", "Docker"],
-    hasDemo: false,
-    demoComponent: null
-  },
-  {
-    id: 8,
-    title: "DevOps and CI/CD",
-    slug: "devops-cicd",
-    excerpt: "Automated testing, deployment pipelines, and infrastructure management for engineering software projects.",
-    fullDescription: "We implement modern DevOps practices specifically tailored for engineering and embedded software projects. Our solutions include automated testing frameworks, continuous integration pipelines, and deployment strategies that ensure reliable and efficient software delivery.",
-    keyFeatures: [
-      "Automated testing frameworks",
-      "Hardware-in-the-Loop (HIL) testing",
-      "Continuous integration pipelines",
-      "Docker containerization",
-      "Infrastructure as Code",
-      "Version control strategies"
-    ],
-    applications: [
-      "Embedded software testing",
-      "Control system validation",
-      "Multi-platform deployment",
-      "Automated compliance testing",
-      "Release management"
-    ],
-    technologies: ["GitLab CI/CD", "Jenkins", "Docker", "Kubernetes", "Terraform", "Ansible"],
+    technologies: ["React", "Node.js", "WebSockets", "InfluxDB", "Grafana", "Docker", "Python"],
     hasDemo: false,
     demoComponent: null
   }

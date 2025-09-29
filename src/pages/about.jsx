@@ -7,49 +7,54 @@ const AboutPage = () => {
   return (
     <Layout 
       pageTitle="About Us"
-      pageDescription="Learn more about our team, values, and commitment to excellence in business consulting."
+      pageDescription="Learn more about our expertise in embedded systems, autonomous robotics, AI, and data platforms."
     >
       <section className={styles.aboutPageSection}>
         <div className={utils.container}>
           <div className={styles.aboutPageContent}>
-            <h1>About Consulting Pro</h1>
+            <h1>About Solomon Pizzocaro Consulting</h1>
             
             <div className={styles.aboutPageText}>
               <p>
-                Founded in 2010, Consulting Pro has been at the forefront of business 
-                transformation, helping companies across various industries achieve 
-                sustainable growth and operational excellence.
+                Solomon Pizzocaro Consulting specializes in advanced engineering solutions 
+                for embedded systems, autonomous robotics, artificial intelligence, and 
+                data platforms. With deep expertise in both theoretical foundations and 
+                practical implementation, we help organizations transform complex technical 
+                challenges into robust, production-ready systems.
               </p>
               
               <p>
-                Our team of experienced consultants brings together diverse backgrounds 
-                in strategy, operations, technology, and change management. We believe 
-                that every business is unique, and we tailor our approach to meet the 
-                specific needs and challenges of each client.
+                Our approach combines cutting-edge research with industry best practices, 
+                ensuring solutions that are not only innovative but also maintainable, 
+                scalable, and aligned with real-world operational requirements.
               </p>
               
-              <h2>Our Mission</h2>
+              <h2>Our Expertise</h2>
               <p>
-                To empower businesses to reach their full potential through innovative 
-                solutions, strategic guidance, and collaborative partnerships that drive 
-                measurable results.
+                We bring comprehensive capabilities across four core domains:
               </p>
-              
-              <h2>Our Values</h2>
               <ul className={styles.valuesList}>
-                <li><strong>Excellence:</strong> We strive for the highest standards in everything we do</li>
-                <li><strong>Integrity:</strong> We build trust through transparent and honest communication</li>
-                <li><strong>Innovation:</strong> We embrace new ideas and creative solutions</li>
-                <li><strong>Collaboration:</strong> We work as partners with our clients</li>
-                <li><strong>Results:</strong> We are committed to delivering measurable outcomes</li>
+                <li><strong>Embedded & Systems Engineering:</strong> From low-level drivers to complete system integration</li>
+                <li><strong>Autonomous Systems & Robotics:</strong> Multi-sensor perception, SLAM, and intelligent navigation</li>
+                <li><strong>Artificial Intelligence & Data Analytics:</strong> NLP, ML, and predictive analytics for industrial applications</li>
+                <li><strong>Data Platforms & Visualization:</strong> Real-time telemetry and actionable insights</li>
               </ul>
               
-              <h2>Why Choose Us</h2>
+              <h2>Our Approach</h2>
               <p>
-                With over a decade of experience and a proven track record of success, 
-                we have the expertise and knowledge to tackle your most complex business 
-                challenges. Our client-centric approach ensures that we understand your 
-                unique needs and deliver solutions that work for your organization.
+                We believe in delivering solutions that balance innovation with practicality. 
+                Every project begins with a deep understanding of your specific requirements 
+                and constraints. We then architect solutions that leverage modern frameworks 
+                like ROS2, implement DevOps best practices, and ensure long-term maintainability 
+                through clean code and comprehensive documentation.
+              </p>
+              
+              <h2>Industries We Serve</h2>
+              <p>
+                Our solutions have been successfully deployed across automotive, industrial 
+                automation, robotics, and agriculture sectors. We work with both established 
+                organizations and innovative startups, adapting our approach to meet the 
+                unique needs of each client.
               </p>
             </div>
           </div>
@@ -61,4 +66,4 @@ const AboutPage = () => {
 
 export default AboutPage;
 
-export const Head = () => <title>About Us | Consulting Pro</title>;
+export const Head = () => <title>About Us | Solomon Pizzocaro Consulting</title>;

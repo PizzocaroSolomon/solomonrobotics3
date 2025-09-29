@@ -25,12 +25,12 @@ const portfolioData = [
     results: ["Centimeter-level navigation accuracy", "Robust operation in GPS-denied areas", "Published research papers", "Industry partnership demonstrations"]
   },
   {
-    id: 3,
+    id: 2,
     title: "Racing Telemetry Platform",
     slug: "racing-telemetry-platform",
     excerpt: "Built real-time telemetry visualization system for race car simulators using modern web technologies.",
     fullDescription: "Designed and implemented comprehensive real-time telemetry platform for AS.CAR.I's race car simulators and testing infrastructure. System provides live data visualization, performance analytics, and remote monitoring capabilities. Utilized WebSockets for real-time communication, React for responsive dashboards, and optimized Docker deployment strategies. Platform enables engineers to monitor vehicle performance and make data-driven decisions during testing and simulation.",
-    image: "/images/sensor-fusion.jpg",
+    image: "/images/telemetry_race_car.png",
     technologies: ["WebSockets", "React", "Node.js", "Docker", "Real-time Analytics"],
     client: "AS.CAR.I spa",
     duration: "Mar 2024 - May 2025",
@@ -50,12 +50,12 @@ const portfolioData = [
     results: ["Real-time data streaming", "Interactive dashboards", "Improved testing efficiency", "Remote monitoring capabilities"]
   },
   {
-    id: 5,
+    id: 3,
     title: "Deep Learning Grape Detection",
     slug: "deep-learning-grape-detection",
     excerpt: "Created CNN-based grape and peduncle detection system using mono and depth cameras for agricultural automation.",
     fullDescription: "Developed sophisticated computer vision system for automated grape detection and harvesting support. Implemented custom CNN architectures for detecting grapes and peduncles using both monocular and depth camera inputs. System designed to work in varying lighting conditions and complex vineyard environments. Research contributed to advancing precision agriculture and automated harvesting technologies.",
-    image: "/images/computer-vision.jpg",
+    image: "/images/dataset_example_g_and_b.png",
     technologies: ["CNNs", "Deep Learning", "Depth Cameras", "Agricultural AI", "Computer Vision"],
     client: "Politecnico di Milano - PhD Research",
     duration: "2020-2022",
@@ -75,12 +75,12 @@ const portfolioData = [
     results: ["High-accuracy grape detection", "Robust outdoor performance", "Multi-sensor integration", "Agricultural automation advancement"]
   },
   {
-    id: 7,
+    id: 4,
     title: "Optimal Control Path Generation",
     slug: "optimal-control-path-generation",
     excerpt: "Developed and implemented optimal control and path generation algorithms for robotics applications.",
     fullDescription: "Developed advanced optimal control and path generation algorithms for various robotics applications. Utilized Model Predictive Control (MPC) and other optimization techniques to generate smooth and efficient trajectories. Implemented real-time constraint handling and system identification methods. Validated algorithms through simulations and hardware experiments.",
-    image: "/images/control-systems.jpg",
+    image: "/images/path_generation_scenario.png",
     technologies: ["Model Predictive Control", "Optimization Algorithms", "Robotics", "Real-time Systems", "MATLAB"],
     client: "Various",
     duration: "2023-2025",

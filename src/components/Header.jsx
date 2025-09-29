@@ -5,23 +5,17 @@ import * as utils from '../styles/utils.module.css';
 
 // Import the data directly
 const servicesData = [
-  { id: 1, title: "Embedded Software Development", slug: "embedded-software-development" },
-  { id: 2, title: "Autonomous Driving", slug: "autonomous-driving" },
-  { id: 3, title: "Advanced Sensor Fusion", slug: "advanced-sensor-fusion" },
-  { id: 4, title: "Advanced Control Systems", slug: "advanced-control-systems" },
-  { id: 5, title: "AI Integration", slug: "ai-integration" },
-  { id: 6, title: "Computer Vision for Robotics", slug: "computer-vision-robotics" },
-  { id: 7, title: "Telemetry and Data Visualization", slug: "telemetry-data-visualization" },
-  { id: 8, title: "DevOps and CI/CD", slug: "devops-cicd" }
+  { id: 1, title: "Embedded & Systems Engineering", slug: "embedded-systems-engineering" },
+  { id: 2, title: "Autonomous Systems & Robotics", slug: "autonomous-systems-robotics" },
+  { id: 3, title: "Artificial Intelligence & Data Analytics", slug: "ai-data-analytics" },
+  { id: 4, title: "Data Platforms & Visualization", slug: "data-platforms-visualization" }
 ];
 
 const portfolioData = [
   { id: 1, title: "Agricultural Robot Navigation System", slug: "agricultural-robot-navigation-system" },
-  { id: 2, title: "BMW Localization Validation System", slug: "bmw-localization-validation-system" },
-  { id: 3, title: "Racing Telemetry Platform", slug: "racing-telemetry-platform" },
-  { id: 4, title: "Autonomous Parking System", slug: "autonomous-parking-system" },
-  { id: 5, title: "Deep Learning Grape Detection", slug: "deep-learning-grape-detection" },
-  { id: 6, title: "Smart Order Routing Algorithm", slug: "smart-order-routing-algorithm" }
+  { id: 2, title: "Racing Telemetry Platform", slug: "racing-telemetry-platform" },
+  { id: 3, title: "Deep Learning Grape Detection", slug: "deep-learning-grape-detection" },
+  { id: 4, title: "Optimal Control Path Generation", slug: "optimal-path-generation" }
 ];
 
 const Header = () => {

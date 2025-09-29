@@ -67,3 +67,5 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+static/videos/autonomous_driving.mp4
+static/videos/telemetry_race_cra.mp4
