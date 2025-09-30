@@ -1,3 +1,4 @@
+// UPDATED ContactSection.jsx with working email functionality
 import React, { useState } from 'react';
 import * as styles from '../styles/contact.module.css';
 import * as utils from '../styles/utils.module.css';
@@ -9,6 +10,7 @@ const ContactSection = () => {
     message: ''
   });
   const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState(''); // 'submitting', 'success', 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,14 +49,41 @@ const ContactSection = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (validateForm()) {
-      console.log('Form submitted:', formData);
-      // Reset form
-      setFormData({ name: '', email: '', message: '' });
-      alert('Thank you for your message! We will get back to you soon.');
+    if (!validateForm()) {
+      return;
+    }
+
+    setStatus('submitting');
+
+    try {
+      // Using Formspree - replace 'YOUR_FORM_ID' with your actual Formspree form ID
+      const response = await fetch('https://formspree.io/f/xvgwayda', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `New contact form submission from ${formData.name}`
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setStatus(''), 5000);
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setStatus('error');
     }
   };
 
@@ -70,6 +99,18 @@ const ContactSection = () => {
         
         <div className={styles.contactContent}>
           <form onSubmit={handleSubmit} className={styles.contactForm}>
+            {status === 'success' && (
+              <div className={styles.successMessage}>
+                Thank you for your message! We will get back to you soon.
+              </div>
+            )}
+            
+            {status === 'error' && (
+              <div className={styles.errorMessageBox}>
+                Sorry, there was an error sending your message. Please try again or email us directly.
+              </div>
+            )}
+
             <div className={styles.formGroup}>
               <label htmlFor="name" className={styles.formLabel}>
                 Name *
@@ -82,6 +123,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 className={`${styles.formInput} ${errors.name ? styles.formInputError : ''}`}
                 aria-describedby={errors.name ? 'name-error' : undefined}
+                disabled={status === 'submitting'}
               />
               {errors.name && (
                 <span id="name-error" className={styles.errorMessage}>
@@ -102,6 +144,7 @@ const ContactSection = () => {
                 onChange={handleChange}
                 className={`${styles.formInput} ${errors.email ? styles.formInputError : ''}`}
                 aria-describedby={errors.email ? 'email-error' : undefined}
+                disabled={status === 'submitting'}
               />
               {errors.email && (
                 <span id="email-error" className={styles.errorMessage}>
@@ -122,6 +165,7 @@ const ContactSection = () => {
                 rows="5"
                 className={`${styles.formTextarea} ${errors.message ? styles.formInputError : ''}`}
                 aria-describedby={errors.message ? 'message-error' : undefined}
+                disabled={status === 'submitting'}
               />
               {errors.message && (
                 <span id="message-error" className={styles.errorMessage}>
@@ -130,8 +174,12 @@ const ContactSection = () => {
               )}
             </div>
             
-            <button type="submit" className={styles.submitButton}>
-              Send Message
+            <button 
+              type="submit" 
+              className={styles.submitButton}
+              disabled={status === 'submitting'}
+            >
+              {status === 'submitting' ? 'Sending...' : 'Send Message'}
             </button>
           </form>
           
@@ -140,7 +188,7 @@ const ContactSection = () => {
             <div className={styles.contactDetails}>
               <p>
                 <strong>Email:</strong><br />
-                <a href="mailto:solomon.pizzocaro.consulting@gmail.com">solomon.pizzocaro.consulting@gmail.com</a>
+                <a href="mailto:lorenzomuscolino1@gmail.com">lorenzomuscolino1@gmail.com</a>
               </p>
               <p>
                 <strong>Phone:</strong><br />

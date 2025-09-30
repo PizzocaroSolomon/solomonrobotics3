@@ -33,6 +33,27 @@
   padding: 2rem;
 }
 
+/* Success and Error Message Boxes */
+.successMessage {
+  background-color: #d1fae5;
+  border: 1px solid #10b981;
+  color: #065f46;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.errorMessageBox {
+  background-color: #fee2e2;
+  border: 1px solid #dc2626;
+  color: #991b1b;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
 .formGroup {
   margin-bottom: 1.5rem;
 }
@@ -61,6 +82,12 @@
   box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
 }
 
+.formInput:disabled,
+.formTextarea:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
 .formInputError {
   border-color: #dc2626;
 }
@@ -87,11 +114,17 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  width: 100%;
 }
 
-.submitButton:hover,
-.submitButton:focus-visible {
+.submitButton:hover:not(:disabled),
+.submitButton:focus-visible:not(:disabled) {
   background-color: #0052a3;
+}
+
+.submitButton:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
 }
 
 .contactInfo {
